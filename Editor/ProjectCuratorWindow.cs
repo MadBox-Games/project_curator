@@ -82,6 +82,16 @@ namespace Ogxd.ProjectCurator
             var content = new GUIContent(selectedAssetInfo.IsIncludedInBuild ? ProjectIcons.LinkBlue : ProjectIcons.LinkBlack, selectedAssetInfo.IncludedStatus.ToString());
             GUI.Label(new Rect(position.width - 20, rect.y + 1, 16, 16), content);
 
+            GUILayout.Space(5);
+            
+            // Add button to open dependency graph
+            if (GUILayout.Button("Open Dependency Graph", GUILayout.Height(25)))
+            {
+                DependencyGraphWindow.Init();
+            }
+            
+            GUILayout.Space(5);
+
             scroll = GUILayout.BeginScrollView(scroll);
 
             dependenciesOpen = EditorGUILayout.Foldout(dependenciesOpen, $"Dependencies ({selectedAssetInfo.dependencies.Count})");
@@ -131,6 +141,8 @@ namespace Ogxd.ProjectCurator
             menu.AddItem(new GUIContent("Rebuild Database"), false, ProjectCurator.RebuildDatabase);
             menu.AddItem(new GUIContent("Clear Database"), false, ProjectCurator.ClearDatabase);
             menu.AddItem(new GUIContent("Project Overlay"), ProjectWindowOverlay.Enabled, () => { ProjectWindowOverlay.Enabled = !ProjectWindowOverlay.Enabled; });
+            menu.AddSeparator("");
+            menu.AddItem(new GUIContent("Open Dependency Graph"), false, () => { EditorWindow.GetWindow<DependencyGraphWindow>("Dependency Graph"); });
         }
 
         public bool HelpBoxWithButton(GUIContent messageContent, GUIContent buttonContent)
