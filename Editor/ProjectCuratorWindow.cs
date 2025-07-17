@@ -115,12 +115,7 @@ namespace Ogxd.ProjectCurator
             GUILayout.EndScrollView();
 
             if (!selectedAssetInfo.IsIncludedInBuild) {
-                bool deleteClicked = HelpBoxWithButton(new GUIContent("This asset is not referenced and never used. Would you like to delete it ?", EditorGUIUtility.IconContent("console.warnicon").image), new GUIContent("Delete Asset"));
-                if (deleteClicked) {
-                    File.Delete(selectedPath);
-                    AssetDatabase.Refresh();
-                    ProjectCurator.RemoveAssetFromDatabase(selectedPath);
-                }
+                EditorGUILayout.HelpBox("This asset will not ne included in the player-build", MessageType.Info);
             }
         }
 
