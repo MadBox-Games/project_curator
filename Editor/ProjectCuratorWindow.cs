@@ -8,7 +8,7 @@ namespace Ogxd.ProjectCurator
     public class ProjectCuratorWindow : EditorWindow, IHasCustomMenu
     {
 
-        [MenuItem("Window/Project Curator")]
+        [MenuItem("Window/Project Curator/Summary Window")]
         static void Init()
         {
             GetWindow<ProjectCuratorWindow>("Project Curator");
